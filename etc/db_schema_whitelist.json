@@ -4,7 +4,8 @@
             "fiskal_data_sent": true,
             "fiskal_date_time": true,
             "fiskal_data_response": true,
-            "jir": true
+            "jir": true,
+            "operator": true
         }
     }
 }

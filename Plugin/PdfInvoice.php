@@ -55,6 +55,12 @@ class PdfInvoice
             'label' => 'JIR',
             'value' => $fiskalInvoice->getJir()
         ];
+        if ($fiskalInvoice->getOperator()) {
+            $fiskalInfos[] = [
+                'label' => __('Operator'),
+                'value' => $fiskalInvoice->getOperator()
+            ];
+        }
 
         $subject->y -= 20;
         $lineBlock = ['lines' => [], 'height' => 15];

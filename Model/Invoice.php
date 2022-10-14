@@ -167,6 +167,16 @@ class Invoice extends AbstractExtensibleModel implements InvoiceInterface
         return $this->setData(InvoiceInterface::ZKI, $zki);
     }
 
+    public function getOperator()
+    {
+        return $this->_getData(InvoiceInterface::OPERATOR);
+    }
+
+    public function setOperator($operator)
+    {
+        return $this->setData(InvoiceInterface::OPERATOR, $operator);
+    }
+
     public function getErrorMessage()
     {
         return $this->_getData(InvoiceInterface::ERROR_MESSAGE);
@@ -186,7 +196,7 @@ class Invoice extends AbstractExtensibleModel implements InvoiceInterface
     {
         return $this->setData(InvoiceInterface::FISKAL_DATA_SENT, $fiskalDataSent);
     }
-    
+
     public function getFiskalDataResponse()
     {
         return $this->_getData(InvoiceInterface::FISKAL_DATA_RESPONSE);
@@ -196,7 +206,7 @@ class Invoice extends AbstractExtensibleModel implements InvoiceInterface
     {
         return $this->setData(InvoiceInterface::FISKAL_DATA_RESPONSE, $fiskalDataResponse);
     }
-    
+
     public function getExtensionAttributes()
     {
         return $this->_getExtensionAttributes();

@@ -27,6 +27,9 @@
                     <label>OIB</label>
                     <validate>required-entry validate-digits validate-digits-range digits-range-00000000000-99999999999-</validate>
                 </field>
+                <field id="operator" translate="label" type="text" sortOrder="25" showInDefault="1" showInWebsite="1">
+                    <label>Operator</label>
+                </field>
                 <field id="registered_for_pdv" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1">
                     <label>Registered For PDV</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
