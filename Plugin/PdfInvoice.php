@@ -29,6 +29,44 @@ class PdfInvoice
     }
 
     public function beforeInsertFiskalInfo(OriginalPdfInvoice $subject, $page, $invoice) {
+
+        /** @var \Magento\Sales\Model\Order\Invoice $invoice */
+
+        if (
+            $invoice->getOrderCurrencyCode() == 'HRK'
+            && $invoice->getBaseCurrencyCode() == 'HRK'
+        ) {
+            $totalEur = $invoice->getBaseGrandTotal() / 7.53450;
+            $totalEur = number_format(round($totalEur, 2), 2, ',', '') . ' €';
+
+            $lineBlock = ['lines' => [], 'height' => 15];
+            $lineBlock['lines'][] = [
+                [
+                    'text' => 'Ukupno (EUR)',
+                    'feed' => 475,
+                    'align' => 'right',
+                    'font_size' => '10',
+                    'font' => 'bold',
+                ],
+                [
+                    'text' => $totalEur,
+                    'feed' => 565,
+                    'align' => 'right',
+                    'font_size' => '10',
+                    'font' => 'bold'
+                ]
+            ];
+            $lineBlock['lines'][] = [
+                [
+                    'text' => 'Fiksni tečaj konverzije 1 EUR = 7,53450 HRK',
+                    'feed' => 565,
+                    'align' => 'right',
+                    'font_size' => '9',
+                ],
+            ];
+            $page = $subject->drawLineBlocks($page, [$lineBlock]);
+        }
+
         $fiskalInfos = [];
         $fiskalInvoice = $this->invoiceManagement->getFiskalInvoice($invoice->getId());
         if (

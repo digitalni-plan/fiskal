@@ -23,6 +23,8 @@ class Config extends DataObject
 
     const XML_PATH_OIB = 'trive_fiskal/settings/oib';
 
+    const XML_PATH_OPERATOR = 'trive_fiskal/settings/operator';
+
     const XML_PATH_REGISTERED_FOR_PDV = 'trive_fiskal/settings/registered_for_pdv';
 
     const XML_PATH_CERTIFICATE_FILE = 'trive_fiskal/settings/certificate_file';
@@ -156,6 +158,22 @@ class Config extends DataObject
     {
         return $this->scopeConfig->getValue(
             self::XML_PATH_OIB,
+            ScopeInterface::SCOPE_STORE,
+            $store
+        );
+    }
+
+    /**
+     * Get Operator form stored config
+     *
+     * @param int $store
+     *
+     * @return string
+     */
+    public function getOperator($store = null)
+    {
+        return $this->scopeConfig->getValue(
+            self::XML_PATH_OPERATOR,
             ScopeInterface::SCOPE_STORE,
             $store
         );

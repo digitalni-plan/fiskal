@@ -66,7 +66,8 @@ class FiskalInvoiceService
                       ->setLocationCode($this->config->getLocationCode())
                       ->setPaymentDeviceCode($this->config->getPaymentDeviceCode())
                       ->setEntityType(FiskalInvoiceInterface::ENTITY_TYPE_INVOICE)
-                      ->setEntityId($invoice->getEntityId());
+                      ->setEntityId($invoice->getEntityId())
+                      ->setOperator($this->config->getOperator());
         try {
             $this->invoiceRepository->save($fiskalInvoice);
         } catch (\Exception $e) {
@@ -85,7 +86,8 @@ class FiskalInvoiceService
                       ->setLocationCode($this->config->getLocationCode())
                       ->setPaymentDeviceCode($this->config->getPaymentDeviceCode())
                       ->setEntityType(FiskalInvoiceInterface::ENTITY_TYPE_CREDITMEMO)
-                      ->setEntityId($creditmemo->getEntityId());
+                      ->setEntityId($creditmemo->getEntityId())
+                      ->setOperator($this->config->getOperator());
         try {
             $this->invoiceRepository->save($fiskalInvoice);
         } catch (\Exception $e) {
