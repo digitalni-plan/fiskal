@@ -5,7 +5,7 @@
     "version": "1.1.7",
     "license": "proprietary",
     "require": {
-        "php": "^7.0",
+        "php": "^7.0|^8.1",
         "trive/fiskalapi": "^1.0.3",
         "endroid/qrcode": "*"
     },
