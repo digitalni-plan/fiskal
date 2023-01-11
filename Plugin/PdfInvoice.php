@@ -5,6 +5,11 @@ namespace Trive\Fiskal\Plugin;
 use Magento\Sales\Model\Order\Pdf\Invoice as OriginalPdfInvoice;
 use Magento\Framework\UrlInterface;
 use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelLow;
+use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
+use Endroid\QrCode\Color\Color;
+use Endroid\QrCode\Writer\PngWriter;
 
 class PdfInvoice
 {
@@ -127,10 +132,19 @@ class PdfInvoice
             number_format($invoice->getBaseGrandTotal(), 2, '', '')
         );
 
-        $qrCode = new QrCode($text);
-        $qrCode->setSize(300);
-        $qrCode->setWriterByName('png');
-        file_put_contents('qr.code.png', $qrCode->writeString());
+        $qrCode = QrCode::create($text)
+            ->setEncoding(new Encoding('UTF-8'))
+            ->setErrorCorrectionLevel(new ErrorCorrectionLevelLow())
+            ->setSize(300)
+            ->setMargin(0)
+            ->setRoundBlockSizeMode(new RoundBlockSizeModeMargin())
+            ->setForegroundColor(new Color(0, 0, 0))
+            ->setBackgroundColor(new Color(255, 255, 255));
+
+        $writer = new PngWriter();
+        $result = $writer->write($qrCode);
+        $result->saveToFile('qr.code.png');
+        
         $image = \Zend_Pdf_Image::imageWithPath('qr.code.png');
         $page->drawImage($image, 30, $subject->y, 130, $subject->y + 100);
     }
