@@ -7,7 +7,7 @@
     "require": {
         "php": "^7.0|^8.1",
         "trive/fiskalapi": "^1.0.3",
-        "endroid/qrcode": "*"
+        "endroid/qr-code": "*"
     },
     "autoload": {
         "files": [
