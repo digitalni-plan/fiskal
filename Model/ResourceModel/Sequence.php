@@ -23,12 +23,9 @@ class Sequence extends AbstractDb
      * @param null    $resourcePrefix
      */
     public function __construct(
-        Context $context,
-        $resourcePrefix = null
+        protected Context $context,
+        protected $resourcePrefix = null
     ) {
-        $this->context = $context;
-        $this->resourcePrefix = $resourcePrefix;
-
         parent::__construct($context, $resourcePrefix);
     }
 
